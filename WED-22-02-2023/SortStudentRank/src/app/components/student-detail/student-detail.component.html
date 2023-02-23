@@ -1,0 +1,21 @@
+<table class='table'>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Class</th>
+        <th>Rank</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr appCustom [rank]="1">
+        <td>{{student.id}}</td>
+        <td>{{student.name}}</td>
+        <td>{{student.gender}}</td>
+        <td>{{student.class | custom}}</td>
+        <td><input type="number" [(ngModel)]="student.rank"/></td>
+        <td><button (click)="submitUpdate(student)">Update</button></td>
+      </tr>
+    </tbody>
+  </table>

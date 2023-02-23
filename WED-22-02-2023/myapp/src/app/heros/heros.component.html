@@ -1,0 +1,8 @@
+<ul>
+    <li *ngFor="let hero of heros">
+        <span>{{hero.id | custom: 10}} :</span>
+        <span>{{hero.name}}</span>
+        <button (click)="printhero(hero)">Click</button>
+    </li>
+</ul>
+<app-hero-detail [inputHero]="selectedHero" (newHero)="updateFromChild($event)"></app-hero-detail>

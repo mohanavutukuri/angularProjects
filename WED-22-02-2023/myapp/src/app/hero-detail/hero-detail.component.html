@@ -1,0 +1,6 @@
+<div>
+    <span>{{inputHero.id}} :</span>
+    <span>{{inputHero.name}}</span><br>
+    <input [(ngModel)]="inputHero.name" (keyup)="updateHero()"/>
+    <button (click)="updateHero()">Update</button>
+</div>
