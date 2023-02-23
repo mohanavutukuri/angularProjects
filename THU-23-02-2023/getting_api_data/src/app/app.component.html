@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <th>ID Nation</th>
+    <th>Nation</th>
+    <th>ID Year</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of dataArray">
+      <td>{{data["ID Nation"]}}</td>
+      <td>{{data.Nation}}</td>
+      <td>{{data["ID Year"]}}</td>
+    </tr>
+  </tbody>
+</table>
