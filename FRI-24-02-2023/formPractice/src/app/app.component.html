@@ -1,0 +1,17 @@
+<form [formGroup]="userForm">
+<label>FirstName</label>
+<input formControlName="firstName"/><br>
+<label>lastName</label>
+<input formControlName="lastName" /><br>
+<label>Address</label>
+<input formControlName="address" /><br>
+<label>age</label><br>
+<input type="number" formControlName="age" /><br>
+<label>category</label>
+<select  formControlName="userType">
+  <option value="student">Student</option>
+  <option value="professional">Professional</option>
+</select><br>
+<button type="submit" [disabled]="!userForm.valid" (click)="sendReactiveForms()">submit</button>
+
+</form>
