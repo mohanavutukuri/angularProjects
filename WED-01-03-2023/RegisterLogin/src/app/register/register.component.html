@@ -1,0 +1,11 @@
+<form [formGroup]="userRegForm">
+  name : <input name="name" formControlName="name" /> <span *ngIf="!userRegForm.controls['name'].valid" style="color:red">name is required</span> <br><br>
+  email : <input name="email" formControlName="email"/> <span *ngIf="!userRegForm.controls['email'].valid" style="color:red">email is not valid</span><br><br>
+  password : <input name="password" formControlName="password" /> <span *ngIf="!userRegForm.controls['password'].valid" style="color:red">password need to be greaterthan 8 and lessthan 14</span><br><br>
+  gender : <input name="gender" type="radio" value="male" formControlName="gender"/>male &nbsp;
+  <input name="gender" type="radio" value="female" formControlName="gender"/>female&nbsp;&nbsp;<span *ngIf="!userRegForm.controls['gender'].valid" style="color:red">gender is required</span><br><br>
+  married : <input name="married" type="checkbox" formControlName="married"/><br><br>
+  profession : <input type="profession" formControlName="profession">&nbsp;&nbsp;<span *ngIf="!userRegForm.controls['profession'].valid" style="color:red">profession is required</span><br><br>
+  income : <input type="number" formControlName="income" />&nbsp;&nbsp;<span *ngIf="!userRegForm.controls['income'].valid" style="color:red">income need to be greaterthan 20000 & lessthan 80000</span><br><br>
+  <button [disabled]="!userRegForm.valid" (click)="submit()">Save</button>
+</form>

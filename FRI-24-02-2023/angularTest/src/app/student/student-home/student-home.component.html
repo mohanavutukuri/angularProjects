@@ -1,0 +1,51 @@
+<div class="main">
+  <form [formGroup]="studentForm">
+    <div class="container">
+      <h1> Student Form</h1>
+      <hr>
+      <label> name : </label>
+      <input formControlName="name" /><br><br>
+      <label>Course : </label>
+      <select formControlName="course">
+        <option value="Course">Course</option>
+        <option value="BCA">BCA</option>
+        <option value="BBA">BBA</option>
+        <option value="B.Tech">B.Tech</option>
+        <option value="MBA">MBA</option>
+        <option value="MCA">MCA</option>
+        <option value="M.Tech">M.Tech</option>
+      </select><br><br>
+      <label>Gender : </label>
+      <input type="radio" value="Male" name="gender" formControlName="gender"> Male
+      <input type="radio" value="Female" name="gender" formControlName="gender"> Female
+      <input type="radio" value="Other" name="gender" formControlName="gender"> Other <br><br>
+      <label>Phone :</label>
+      <input formControlName="phone" /><br><br>
+      <label for="email">Email : </label>
+      <input type="email" placeholder="Enter Email" formControlName="email"><br><br>
+      <input class="registerbtn" [disabled]="!studentForm.valid" type="button" (click)="printData()" value="SEND">
+    </div>
+  </form>
+
+
+  <div class="list">
+    <table>
+      <thead>
+        <th>name</th>
+        <th>gender</th>
+        <th>course</th>
+        <th>email</th>
+        <th>phone</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

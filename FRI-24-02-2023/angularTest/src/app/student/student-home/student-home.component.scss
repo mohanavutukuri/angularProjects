@@ -1,0 +1,33 @@
+.main{
+  display: flex;
+  justify-content: space-evenly;
+}
+.container {
+  padding: 50px;
+  background-color: lightblue;
+}
+
+input:focus ,select:focus{
+  background-color: #eba1a1;
+  outline: none;
+}
+div {
+  padding: 10px 0;
+}
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+.registerbtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+.registerbtn:hover {
+  opacity: 1;
+}

@@ -1,0 +1,202 @@
+<h2>player {{turn +1}} turn</h2>
+<div class="container">
+  <div id="dice" class="dice" (click)="rollDice()">
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face top"></div>
+    <div class="face bottom-dice"></div>
+    <div class="face right-dice"></div>
+    <div class="face left"></div>
+  </div>
+</div>
+
+<!-- <button [disabled]="enableBtn" (click)="rollDice()"> ROLL </button> -->
+<div class="main">
+  <div class="row-big">
+    <!-- red main box -->
+    <div class="col-big">
+      <div class="box">
+        <div id="rdpin1" class="gitti"></div>
+        <div id="rdpin2" class="gitti right"></div>
+        <div id="rdpin3" class="gitti bottom"></div>
+        <div id="rdpin4" class="gitti bottom-l"></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="col-sm">
+        <div id="1,25" class="row-ver"></div>
+        <div id="1,24" class="row-ver"></div>
+        <div id="1,23" class="row-ver"></div>
+        <div id="1,22" class="row-ver"></div>
+        <div id="1,21" class="row-ver"></div>
+        <div id="1,20" class="row-ver"></div>
+      </div>
+      <div class="col-sm">
+        <div id="1,26" class="row-ver arrow-green"></div>
+        <div id="3,27" class="row-ver gr"></div>
+        <div id="3,28" class="row-ver gr"></div>
+        <div id="3,29" class="row-ver gr"></div>
+        <div id="3,30" class="row-ver gr"></div>
+        <div id="3,31" class="row-ver gr"></div>
+      </div>
+      <div class="col-sm">
+        <div id="1,27" class="row-ver"></div>
+        <div id="1,28" class="row-ver gr"></div>
+        <div id="1,29" class="row-ver"></div>
+        <div id="1,30" class="row-ver"></div>
+        <div id="1,31" class="row-ver"></div>
+        <div id="1,32" class="row-ver"></div>
+      </div>
+    </div>
+    <!-- green main -->
+    <div class="col-big" style="background: lightgreen;">
+      <div class="box">
+        <div id="grpin1" class="gitti"></div>
+        <div id="grpin2" class="gitti right"></div>
+        <div id="grpin3" class="gitti bottom"></div>
+        <div id="grpin4" class="gitti bottom-l"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-bet">
+      <div class="row-horizontal">
+        <div id="1,14" class="col-horizontal"></div>
+        <div id="1,13" class="col-horizontal" style="position: relative;">
+          <div class="arrow-red"></div>
+        </div>
+        <div id="1,12" class="col-horizontal"></div>
+      </div>
+      <div class="row-horizontal">
+        <div id="1,15" class="col-horizontal rd"></div>
+        <div id="2,14" class="col-horizontal rd"></div>
+        <div id="1,11" class="col-horizontal "></div>
+      </div>
+      <div class="row-horizontal">
+        <div id="1,16" class="col-horizontal"></div>
+        <div id="2,15" class="col-horizontal rd"></div>
+        <div id="1,10" class="col-horizontal"></div>
+      </div>
+      <div class="row-horizontal">
+        <div id="1,17" class="col-horizontal"></div>
+        <div id="2,16" class="col-horizontal rd"></div>
+        <div id="1,9" class="col-horizontal"></div>
+      </div>
+      <div class="row-horizontal">
+        <div id="1,18" class="col-horizontal"></div>
+        <div id="2,17" class="col-horizontal rd"></div>
+        <div id="1,8" class="col-horizontal"></div>
+      </div>
+      <div class="row-horizontal">
+        <div id="1,19" class="col-horizontal"></div>
+        <div id="2,18" class="col-horizontal rd"></div>
+        <div id="1,7" class="col-horizontal"></div>
+      </div>
+
+    </div>
+
+    <div class="col-square"></div>
+    <div class="col-bet">
+
+      <div class="row-horizontal">
+        <div id="1,33" class="col-horizontal"></div>
+        <div id="4,44" class="col-horizontal yl"></div>
+        <div id="1,45" class="col-horizontal"></div>
+      </div>
+      <div class="row-horizontal">
+        <div id="1,34" class="col-horizontal"></div>
+        <div id="4,43" class="col-horizontal yl"></div>
+        <div id="1,44" class="col-horizontal"></div>
+      </div>
+      <div class="row-horizontal">
+        <div id="1,35" class="col-horizontal"></div>
+        <div id="4,42" class="col-horizontal yl"></div>
+        <div id="1,43" class="col-horizontal"></div>
+      </div>
+      <div class="row-horizontal">
+        <div id="1,36" class="col-horizontal"></div>
+        <div id="4,41" class="col-horizontal yl"></div>
+        <div id="1,42" class="col-horizontal"></div>
+      </div>
+      <div class="row-horizontal">
+        <div id="1,37" class="col-horizontal"></div>
+        <div id="4,40" class="col-horizontal yl"></div>
+        <div id="1,41" class="col-horizontal yl"></div>
+      </div>
+      <div class="row-horizontal">
+        <div id="1,38" class="col-horizontal"></div>
+        <div id="1,39" class="col-horizontal" style="position: relative;">
+          <div class="arrow-yellow"></div>
+        </div>
+        <div id="1,40" class="col-horizontal"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row-big">
+    <div class="col-big" style="background:rgb(0, 191, 255);">
+      <div class="box">
+        <div id="blpin1" class="gitti blpin1"></div>
+        <div id="blpin2" class="gitti blpin2 right"></div>
+        <div id="blpin3" class="gitti blpin3 bottom"></div>
+        <div id="blpin4" class="gitti blpin4 bottom-l"></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="col-sm">
+        <div id="1,6" class="row-ver"></div>
+        <div id="1,5" class="row-ver"></div>
+        <div id="1,4" class="row-ver"></div>
+        <div id="1,3" class="row-ver "></div>
+        <div id="1,2" class="row-ver bl"></div>
+        <div id="1,1" class="row-ver"></div>
+      </div>
+      <div class="col-sm">
+        <div id="1,57" class="row-ver bl"></div>
+        <div id="1,56" class="row-ver bl"></div>
+        <div id="1,55" class="row-ver bl"></div>
+        <div id="1,54" class="row-ver bl"></div>
+        <div id="1,53" class="row-ver bl"></div>
+        <div id="1,52" class="row-ver arrow-blue"></div>
+      </div>
+      <div class="col-sm">
+        <div id="1,46" class="row-ver"></div>
+        <div id="1,47" class="row-ver"></div>
+        <div id="1,48" class="row-ver"></div>
+        <div id="1,49" class="row-ver "></div>
+        <div id="1,50" class="row-ver"></div>
+        <div id="1,51" class="row-ver"></div>
+      </div>
+    </div>
+    <div class="col-big" style=" background: rgb(235, 235, 18);">
+      <div class="box">
+        <div id="ylpin1" class="gitti"></div>
+        <div id="ylpin2" class="gitti right"></div>
+        <div id="ylpin3" class="gitti bottom"></div>
+        <div id="ylpin4" class="gitti bottom-l"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="allpins">
+  <!-- <div *ngFor="let ele of pins" [id]="ele.movepinid"
+  [ngClass]="{'rd pin': ele.movepinid.includes('rd'),'bl pin': ele.movepinid.includes('bl')}"></div> -->
+  <div id="moveblpin1" class="bl pin" (click)="selectedKey('moveblpin1')"></div>
+  <div id="moveblpin2" class="bl pin" (click)="selectedKey('moveblpin2')"></div>
+  <div id="moveblpin3" class="bl pin" (click)="selectedKey('moveblpin3')"></div>
+  <div id="moveblpin4" class="bl pin" (click)="selectedKey('moveblpin4')"></div>
+
+  <div id="moverdpin1" class="rd pin" (click)="selectedKey('moverdpin1')"></div>
+  <div id="moverdpin2" class="rd pin" (click)="selectedKey('moverdpin2')"></div>
+  <div id="moverdpin3" class="rd pin" (click)="selectedKey('moverdpin3')"></div>
+  <div id="moverdpin4" class="rd pin" (click)="selectedKey('moverdpin4')"></div>
+
+  <div id="movegrpin1" class="gr pin" (click)="selectedKey('movegrpin1')"></div>
+  <div id="movegrpin2" class="gr pin" (click)="selectedKey('movegrpin2')"></div>
+  <div id="movegrpin3" class="gr pin" (click)="selectedKey('movegrpin3')"></div>
+  <div id="movegrpin4" class="gr pin" (click)="selectedKey('movegrpin4')"></div>
+
+  <div id="moveylpin1" class="yl pin" (click)="selectedKey('moveylpin1')"></div>
+  <div id="moveylpin2" class="yl pin" (click)="selectedKey('moveylpin2')"></div>
+  <div id="moveylpin3" class="yl pin" (click)="selectedKey('moveylpin3')"></div>
+  <div id="moveylpin4" class="yl pin" (click)="selectedKey('moveylpin4')"></div>
+</div>
