@@ -12,6 +12,7 @@ export class BoardComponent implements OnInit {
   enableBtn=false;
   selected:string='';
   randN:number=0;
+  changeTurn:Boolean=true;
   constructor() { }
 
   bluePath=["1,2","1,3","1,4","1,5","1,6","1,7","1,8","1,9","1,10",
@@ -40,22 +41,22 @@ export class BoardComponent implements OnInit {
   greenpathPosition:XY[]=[]
   yellowpathPosition:XY[]=[]
   pins=[
-    {pinid:"blpin1",movepinid:"moveblpin1",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"blpin2",movepinid:"moveblpin2",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"blpin3",movepinid:"moveblpin3",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"blpin4",movepinid:"moveblpin4",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"rdpin1",movepinid:"moverdpin1",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"rdpin2",movepinid:"moverdpin2",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"rdpin3",movepinid:"moverdpin3",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"rdpin4",movepinid:"moverdpin4",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"grpin1",movepinid:"movegrpin1",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"grpin2",movepinid:"movegrpin2",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"grpin3",movepinid:"movegrpin3",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"grpin4",movepinid:"movegrpin4",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"ylpin1",movepinid:"moveylpin1",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"ylpin2",movepinid:"moveylpin2",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"ylpin3",movepinid:"moveylpin3",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"ylpin4",movepinid:"moveylpin4",currplaceind:-1,out:false,top:0,left:0,safe:true}
+    {pinid:"blpin1",player:0,movepinid:"moveblpin1",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"blpin2",player:0,movepinid:"moveblpin2",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"blpin3",player:0,movepinid:"moveblpin3",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"blpin4",player:0,movepinid:"moveblpin4",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"rdpin1",player:1,movepinid:"moverdpin1",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"rdpin2",player:1,movepinid:"moverdpin2",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"rdpin3",player:1,movepinid:"moverdpin3",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"rdpin4",player:1,movepinid:"moverdpin4",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"grpin1",player:2,movepinid:"movegrpin1",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"grpin2",player:2,movepinid:"movegrpin2",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"grpin3",player:2,movepinid:"movegrpin3",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"grpin4",player:2,movepinid:"movegrpin4",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"ylpin1",player:3,movepinid:"moveylpin1",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"ylpin2",player:3,movepinid:"moveylpin2",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"ylpin3",player:3,movepinid:"moveylpin3",currplaceind:-1,out:false,top:0,left:0,safe:true},
+    {pinid:"ylpin4",player:3,movepinid:"moveylpin4",currplaceind:-1,out:false,top:0,left:0,safe:true}
   ]
 
   ngOnInit(): void {
@@ -90,27 +91,76 @@ export class BoardComponent implements OnInit {
       let offSet=element!.getBoundingClientRect();
       each.top=offSet.top
       each.left=offSet.left
-      document.getElementById(each.movepinid)!.style.top=offSet.top+8+"px";
-      document.getElementById(each.movepinid)!.style.left=offSet.left+5+"px"
+      document.getElementById(each.movepinid)!.style.top=offSet.top+10+"px";
+      document.getElementById(each.movepinid)!.style.left=offSet.left+9.5+"px"
     })
   }
+  // setUserColor(){
+
+  // }
   getColor(val:number){
     switch(val){
       case 0:
+        document.getElementById("inner")!.style.animation="blue-pulse linear 1s infinite";
         return "bl"
       case 1:
+        document.getElementById("inner")!.style.animation="red-pulse linear 1s infinite";
         return "rd"
       case 2:
+        document.getElementById("inner")!.style.animation="green-pulse linear 1s infinite";
         return "gr"
       case 3:
+        document.getElementById("inner")!.style.animation="yellow-pulse linear 1s infinite";
         return "yl"
     }
     return "";
   }
+  setSafe(selectedPin:any){
+    let safePoints=["1,2","1,10","1,15","1,23","1,28","1,36","1,41","1,49"];
+    if(this.selected.includes("bl")){
+      if(safePoints.includes(this.bluePath[selectedPin.currplaceind])){
+        selectedPin.safe=true;
+        console.log(selectedPin.movepinid," is set to safe");
+      }else{
+        selectedPin.safe=false;
+        console.log(selectedPin.movepinid," is set to unsafe");
+      }
+    }
+    else if(this.selected.includes("rd")){
+      if(safePoints.includes(this.redPath[selectedPin.currplaceind])){
+        selectedPin.safe=true;
+        console.log(selectedPin.movepinid," is set to safe");
+      }else{
+        selectedPin.safe=false;
+        console.log(selectedPin.movepinid," is set to unsafe");
+      }
+    }
+    else if(this.selected.includes("gr")){
+      if(safePoints.includes(this.greenPath[selectedPin.currplaceind])){
+        selectedPin.safe=true;
+        console.log(selectedPin.movepinid," is set to safe");
+      }else{
+        selectedPin.safe=false;
+        console.log(selectedPin.movepinid," is set to unsafe");
+      }
+    }
+    else if(this.selected.includes("yl")){
+      if(safePoints.includes(this.yellowPath[selectedPin.currplaceind])){
+        selectedPin.safe=true;
+        console.log(selectedPin.movepinid," is set to safe");
+      }else{
+        selectedPin.safe=false;
+        console.log(selectedPin.movepinid," is set to unsafe");
+      }
+    }
+  }
   selectedKey(id:string){
-    console.log("selected pin id =",id);
     this.selected=id;
     let classlist=document.getElementById(id)!.classList;
+    if(this.randN==0){
+      alert("please roll the dice");
+      return;
+    }
     if(this.randN>0 && classlist.contains('scale')){
       this.pins.forEach(data=>{
         document.getElementById(data.movepinid)!.classList.remove('scale');
@@ -118,23 +168,26 @@ export class BoardComponent implements OnInit {
           data.out=true;
           if(data.currplaceind==-1)
           data.currplaceind=0;
-          else if((data.currplaceind+this.randN)<this.bluepathPosition.length)
-          data.currplaceind+=this.randN;
+          else if((data.currplaceind+this.randN)<this.bluepathPosition.length){
+            data.currplaceind+=this.randN;
+            this.setSafe(data);
+            this.checkPlace(data);
+          }
           if(this.selected.includes("bl")){
-            document.getElementById(this.selected)!.style.top=this.bluepathPosition[data.currplaceind].top+"px";
-            document.getElementById(this.selected)!.style.left=this.bluepathPosition[data.currplaceind].left+5+"px";
+            document.getElementById(this.selected)!.style.top=this.bluepathPosition[data.currplaceind].top+1+"px";
+            document.getElementById(this.selected)!.style.left=this.bluepathPosition[data.currplaceind].left+1.5+"px";
           }
           else if(this.selected.includes("rd")){
-            document.getElementById(this.selected)!.style.top=this.redpathPosition[data.currplaceind].top+8+"px";
-            document.getElementById(this.selected)!.style.left=this.redpathPosition[data.currplaceind].left+5+"px";
+            document.getElementById(this.selected)!.style.top=this.redpathPosition[data.currplaceind].top+1+"px";
+            document.getElementById(this.selected)!.style.left=this.redpathPosition[data.currplaceind].left+1.5+"px";
           }
           else if(this.selected.includes("gr")){
-            document.getElementById(this.selected)!.style.top=this.greenpathPosition[data.currplaceind].top+8+"px";
-            document.getElementById(this.selected)!.style.left=this.greenpathPosition[data.currplaceind].left+5+"px";
+            document.getElementById(this.selected)!.style.top=this.greenpathPosition[data.currplaceind].top+1+"px";
+            document.getElementById(this.selected)!.style.left=this.greenpathPosition[data.currplaceind].left+1.5+"px";
           }
           else if(this.selected.includes("yl")){
-            document.getElementById(this.selected)!.style.top=this.yellowpathPosition[data.currplaceind].top+8+"px";
-            document.getElementById(this.selected)!.style.left=this.yellowpathPosition[data.currplaceind].left+5+"px";
+            document.getElementById(this.selected)!.style.top=this.yellowpathPosition[data.currplaceind].top+1+"px";
+            document.getElementById(this.selected)!.style.left=this.yellowpathPosition[data.currplaceind].left+1.5+"px";
           }
         }
       })
@@ -143,78 +196,77 @@ export class BoardComponent implements OnInit {
     }else{
       alert("select a valid pin")
     }
-
+    if(this.changeTurn){
+      this.turn=(++this.turn)%4;
+      this.getColor(this.turn);
+    }
+    this.changeTurn=true;
   }
-
+  getDivId(pinInfo:any){
+    switch(pinInfo.player){
+      case 0:
+        return this.bluePath[pinInfo.currplaceind];
+      case 1:
+        return this.redPath[pinInfo.currplaceind];
+      case 2:
+        return this.greenPath[pinInfo.currplaceind];
+      case 3:
+        return this.yellowPath[pinInfo.currplaceind];
+    }
+    return ;
+  }
+  checkPlace(pinInfo:any){
+    var currdivId=this.getDivId(pinInfo);
+    
+    this.pins.forEach(data=>{
+      if(pinInfo.player!=data.player && this.getDivId(data)==(currdivId) && !pinInfo.safe){
+        data.currplaceind=-1;
+        data.out=false;
+        document.getElementById(data.movepinid)!.style.top=data.top+10+"px";
+        document.getElementById(data.movepinid)!.style.left=data.left+9.5+"px";
+      }
+    })
+  }
   rollDice() {
-    const dice = document.getElementById('dice');
+    if(this.enableBtn){
+      alert("please move the pin");
+      return;
+    }
     
     let randNum = (Math.floor(10 * Math.random()) % 6) + 1;
     this.randN=randNum;
     // console.log("player = ",this.turn+1,"randNo = ",randNum);
-
-    dice!.style.animation = 'rolling 3s';
-
-    setTimeout(() => {
-
-        switch (randNum) {
-            case 1:
-                dice!.style.transform = 'rotateX(0deg) rotateY(0deg)';
-                break;
-
-            case 6:
-                dice!.style.transform = 'rotateX(180deg) rotateY(0deg)';
-                break;
-
-            case 2:
-                dice!.style.transform = 'rotateX(-90deg) rotateY(0deg)';
-                break;
-
-            case 5:
-                dice!.style.transform = 'rotateX(90deg) rotateY(0deg)';
-                break;
-
-            case 3:
-                dice!.style.transform = 'rotateX(0deg) rotateY(90deg)';
-                break;
-
-            case 4:
-                dice!.style.transform = 'rotateX(0deg) rotateY(-90deg)';
-                break;
-
-            default:
-                break;
-        }
-
-        dice!.style.animation = 'none';
-
-    }, 3010);
-
-
+    let c=0;
     if(randNum!=6){
       this.pins.forEach(data=>{
         if(data.out &&data.pinid.includes(this.getColor(this.turn))){
           if(data.currplaceind+randNum<=(this.bluepathPosition.length)){
-            console.log("curr in = ",data.currplaceind," new ind will be = ",data.currplaceind+randNum,"list length = ",this.bluePath.length);
+            // console.log("curr in = ",data.currplaceind," new ind will be = ",data.currplaceind+randNum,"list length = ",this.bluePath.length);
             document.getElementById(data.movepinid)!.classList.add('scale');
+            c++;
             this.enableBtn=true;
           }
         }
       })
-      this.turn=(++this.turn)%4;
     }else{
-      console.log("in else");
-
       this.pins.forEach(data=>{
         if(data.pinid.includes(this.getColor(this.turn))){
           this.enableBtn=true;
           if(data.currplaceind+randNum<=(this.bluepathPosition.length)){
-            console.log("curr in = ",data.currplaceind," new ind will be = ",data.currplaceind+randNum,"list length = ",this.bluePath.length);
+            // console.log("curr in = ",data.currplaceind," new ind will be = ",data.currplaceind+randNum,"list length = ",this.bluePath.length);
             document.getElementById(data.movepinid)!.classList.add('scale');
+            c++;
+            this.changeTurn=false;
           }
-
         }
       })
+    }
+    if(this.changeTurn && c==0){
+      this.turn=(++this.turn)%4;
+      this.getColor(this.turn);
+    }
+    if(c==0){
+      this.randN=0;
     }
   }
 

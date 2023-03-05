@@ -1,12 +1,16 @@
-* {
-  margin: 0%;
-}
 
+.completepage{
+  height: 100vh;
+  background-color: black;
+}
 .main {
-  width: 500px;
-  height: 500px;
-  margin-top: 40px;
+  position: relative;
+  top: 10%;
+  left: 15%;
+  width: 452px;
+  height: 452px;
   border: 3px solid black;
+  background-color: white;
 }
 .pin{
   width: 25px;
@@ -14,6 +18,11 @@
   position: absolute;
   border-radius: 50%;
   border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
 }
 .scale{
   animation: zoomInOut 2s infinite;
@@ -32,18 +41,18 @@
   }
 }
 .row-big {
-  width: 500px;
-  height: 190px;
+  width: 452px;
+  height: 181px;
 }
 
 .row {
-  width: 500px;
-  height: 120px;
+  width: 458px;
+  height: 91px;
 }
 
 .col-big {
-  width: 190px;
-  height: 190px;
+  width: 181px;
+  height: 181px;
   float: left;
   background: rgb(235, 14, 14);
   border: 1px solid black;
@@ -51,57 +60,56 @@
 }
 
 .col {
-  width: 120px;
-  height: 190px;
+  width: 90px;
+  height: 180px;
   float: left;
 }
 
 .col-bet {
-  width: 190px;
-  height: 120px;
+  width: 182px;
+  height: 92px;
   float: left;
-  border: 2px solid black;
+  border: 1px solid black;
   box-sizing: border-box;
   transform: translateX(270deg);
 }
-
 .col-square {
   width: 0px;
   height: 0px;
   float: left;
   background: blue;
-  border-left: 60px solid rgb(235, 14, 14);
-  border-right: 60px solid rgb(235, 235, 18);
-  border-bottom: 60px solid rgb(0, 191, 255);
-  border-top: 60px solid lightgreen;
+  border-left: 45px solid rgb(235, 14, 14);
+  border-right: 45px solid rgb(235, 235, 18);
+  border-bottom: 46.5px solid blue;
+  border-top: 46.5px solid lightgreen;
 }
 
 .col-sm {
-  height: 190px;
-  width: 40px;
+  height: 181px;
+  width: 30px;
   float: left;
   border: 1px solid black;
   box-sizing: border-box;
 }
 
 .row-ver {
-  width: 40px;
-  height: 31.3px;
+  width: 30px;
+  height: 30px;
   box-sizing: border-box;
   border-bottom: 1px solid black;
 }
 
 .row-horizontal {
-  width: 31px;
-  height: 120px;
+  width: 30px;
+  height: 90px;
   float: left;
   border: 1px solid black;
   box-sizing: border-box;
 }
 
 .col-horizontal {
-  width: 31px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   box-sizing: border-box;
   margin: 0%;
   border-bottom: 1px solid black;
@@ -112,7 +120,7 @@
   height: 130px;
   background: white;
   border-radius: 25px;
-  margin: 30px 30px;
+  margin: 25px 25px;
   transform: rotate(45deg);
   padding: 20px;
   box-sizing: border-box;
@@ -141,29 +149,27 @@
 
 .arrow-blue {
   padding-top: 9px;
-  margin-left: 4px;
-  border-bottom-color: rgb(0, 191, 255);
+  border-bottom-color: blue;
 }
 
 .arrow-green {
   border-bottom-color: lightgreen;
   transform: rotate(180deg);
   margin-top: 8px;
-  padding-bottom: 9px;
-  margin-left: 4px;
+  padding-bottom: 7px;
 }
 
 .arrow-red {
   transform: rotate(90deg);
   position: absolute;
-  top: 12px;
+  top: 8px;
 }
 
 .arrow-yellow {
   transform: rotate(-90deg);
   position: absolute;
   border-bottom-color: rgb(222, 226, 1);
-  top: 11.5px;
+  top: 8px;
   right: 3px;
 }
 
@@ -185,7 +191,8 @@
 }
 
 .bl {
-  background: rgb(0, 191, 255);
+  // background: rgb(0, 191, 255);
+  background: blue;
 }
 
 .rd {
@@ -197,120 +204,56 @@
 }
 
 .container{
+  width: fit-content;
   position: relative;
-  left: 75%;
+  left: 70%;
+  cursor:pointer;
+  top: 40%;
 }
 
-.dice {
+
+.inner {
   position: absolute;
-  width: 100px;
-  height: 100px;
-  transform-style: preserve-3d;
-  transition: .5s ease;
+  background-color:transparent;
+  width:100px;
+  height:100px;
+  border-radius:50px;
+  animation: blue-pulse linear 1s infinite;
+  cursor:pointer;
+}
+.inner p {
+  opacity:0.5;
+  display:block;
+  text-align: center;
+  line-height: 100px;
+  font-family:sans-serif;
+  font-weight:100;
+  font-size:70px;
+  color: white;
+  text-shadow: 0 0 4px white;
+  cursor:pointer;
 }
 
-@keyframes rolling {
-  50% {
-      transform: rotateX(360deg) rotateY(360deg);
-  }
+@keyframes blue-pulse {
+  0% { box-shadow:0 0 8px blue, inset 0 0 8px blue; }
+  50% { box-shadow:0 0 16px blue, inset 0 0 14px blue; }
+  100% { box-shadow:0 0 8px blue, inset 0 0 8px blue; }
 }
 
-.face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  border: 5px solid #f6f3f0;
-  transform-style: preserve-3d;
-  background: linear-gradient(
-      145deg, #dddbd8, #fff
-  );
+@keyframes red-pulse {
+  0% { box-shadow:0 0 8px red, inset 0 0 8px red; }
+  50% { box-shadow:0 0 16px red, inset 0 0 14px red; }
+  100% { box-shadow:0 0 8px red, inset 0 0 8px red; }
 }
 
-.face::before {
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  background: #f6f3f0;
-  transform: translateZ(-1px);
+@keyframes green-pulse {
+  0% { box-shadow:0 0 8px lightgreen, inset 0 0 8px lightgreen; }
+  50% { box-shadow:0 0 16px lightgreen, inset 0 0 14px lightgreen; }
+  100% { box-shadow:0 0 8px lightgreen, inset 0 0 8px lightgreen; }
 }
 
-.face::after {
-  position: absolute;
-  content: '';
-  top: 50%;
-  left: 50%;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #131210;
+@keyframes yellow-pulse {
+  0% { box-shadow:0 0 8px yellow, inset 0 0 8px yellow; }
+  50% { box-shadow:0 0 16px yellow, inset 0 0 14px yellow; }
+  100% { box-shadow:0 0 8px yellow, inset 0 0 8px yellow; }
 }
-
-.front {
-  transform: translateZ(50px);
-}
-
-.back {
-  transform: rotateX(180deg) translateZ(50px);
-}
-
-.top {
-  transform: rotateX(90deg) translateZ(50px);
-}
-
-.bottom-dice {
-  transform: rotateX(-90deg) translateZ(50px);
-}
-
-.right-dice {
-  transform: rotateY(90deg) translateZ(50px);
-}
-
-.left {
-  transform: rotateY(-90deg) translateZ(50px);
-}
-
-.front::after {
-  width: 30px;
-  height: 30px;
-  background: #f63330;
-  margin: -15px 0 0 -15px;
-}
-
-.back::after {
-  margin: -35px 0 0 -30px;
-  box-shadow: 40px 0,
-              0 25px,
-              40px 25px,
-              0 50px,
-              40px 50px;
-}
-
-.top::after {
-  margin: -30px 0 0 -30px;
-  box-shadow: 40px 40px;
-}
-
-.bottom-dice::after {
-  margin: -36px 0 0 -36px;
-  box-shadow: 26px 26px,
-              52px 52px,
-              52px 0,
-              0 52px;
-}
-
-.right-dice::after {
-  margin: -30px 0 0 -30px;
-  box-shadow: 40px 0,
-  0 40px,
-  40px 40px;
-}
-
-.left::after {
-  margin: -35px 0 0 -35px;
-  box-shadow: 25px 25px,
-              50px 50px;
-}
-
