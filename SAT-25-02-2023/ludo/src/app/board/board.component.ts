@@ -120,37 +120,37 @@ export class BoardComponent implements OnInit {
     if(this.selected.includes("bl")){
       if(safePoints.includes(this.bluePath[selectedPin.currplaceind])){
         selectedPin.safe=true;
-        console.log(selectedPin.movepinid," is set to safe");
+        // console.log(selectedPin.movepinid," is set to safe");
       }else{
         selectedPin.safe=false;
-        console.log(selectedPin.movepinid," is set to unsafe");
+        // console.log(selectedPin.movepinid," is set to unsafe");
       }
     }
     else if(this.selected.includes("rd")){
       if(safePoints.includes(this.redPath[selectedPin.currplaceind])){
         selectedPin.safe=true;
-        console.log(selectedPin.movepinid," is set to safe");
+        // console.log(selectedPin.movepinid," is set to safe");
       }else{
         selectedPin.safe=false;
-        console.log(selectedPin.movepinid," is set to unsafe");
+        // console.log(selectedPin.movepinid," is set to unsafe");
       }
     }
     else if(this.selected.includes("gr")){
       if(safePoints.includes(this.greenPath[selectedPin.currplaceind])){
         selectedPin.safe=true;
-        console.log(selectedPin.movepinid," is set to safe");
+        // console.log(selectedPin.movepinid," is set to safe");
       }else{
         selectedPin.safe=false;
-        console.log(selectedPin.movepinid," is set to unsafe");
+        // console.log(selectedPin.movepinid," is set to unsafe");
       }
     }
     else if(this.selected.includes("yl")){
       if(safePoints.includes(this.yellowPath[selectedPin.currplaceind])){
         selectedPin.safe=true;
-        console.log(selectedPin.movepinid," is set to safe");
+        // console.log(selectedPin.movepinid," is set to safe");
       }else{
         selectedPin.safe=false;
-        console.log(selectedPin.movepinid," is set to unsafe");
+        // console.log(selectedPin.movepinid," is set to unsafe");
       }
     }
   }
@@ -268,6 +268,15 @@ export class BoardComponent implements OnInit {
     if(c==0){
       this.randN=0;
     }
+    if(c==1){
+      this.pins.forEach(data=>{
+        if(document.getElementById(data.movepinid)!.classList.contains('scale')){
+          this.selectedKey(data.movepinid);
+        }
+      });
+    }
+    console.log("c = ",c);
+    
   }
 
 }
