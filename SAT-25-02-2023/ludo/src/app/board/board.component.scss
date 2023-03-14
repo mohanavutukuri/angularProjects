@@ -23,6 +23,7 @@
   align-items: center;
   color: white;
   cursor: pointer;
+  transition: 0.8s;
 }
 .scale{
   animation: zoomInOut 2s infinite;
