@@ -47,7 +47,7 @@ describe('BoardComponent', () => {
   })
   it('selected pin should be moveblpin1',()=>{
     component.selected=''
-    component.selectedKey('moveblpin1');
+    component.movePin('moveblpin1');
 
     expect(component.selected).toEqual('moveblpin1');
   })

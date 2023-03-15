@@ -27,7 +27,7 @@ export class BoardComponent implements OnInit {
   "1,31","1,32","1,33","1,34","1,35","1,36","1,37","1,38","1,39","4,40","4,41","4,42","4,43","4,44"];
   redPath=["1,15","1,16","1,17","1,18","1,19","1,20","1,21","1,22","1,23","1,24","1,25",
   "1,26","1,27","1,28","1,29","1,30","1,31","1,32","1,33","1,34","1,35",
-  "1,36","1,37","1,36","1,39","1,40","1,41","1,42","1,43","1,44","1,45",
+  "1,36","1,37","1,38","1,39","1,40","1,41","1,42","1,43","1,44","1,45",
   "1,46","1,47","1,48","1,49","1,50","1,51","1,52","1,1","1,2","1,3","1,4",
   "1,5","1,6","1,7","1,8","1,9","1,10","1,11","1,12","1,13","2,14","2,15","2,16","2,17","2,18"];
   greenPath=["1,28","1,29","1,30","1,31","1,32","1,33","1,34","1,35","1,36","1,37","1,38",
@@ -154,7 +154,7 @@ export class BoardComponent implements OnInit {
       }
     }
   }
-  selectedKey(id:string){
+  movePin(id:string){
     this.selected=id;
     let classlist=document.getElementById(id)!.classList;
     if(this.randN==0){
@@ -260,6 +260,7 @@ export class BoardComponent implements OnInit {
       }
     })
   }
+
   rollDice() {
     if(this.randN!=0){
       alert("please wait or move the pin");
@@ -268,33 +269,24 @@ export class BoardComponent implements OnInit {
     
     let randNum = (Math.floor(10 * Math.random()) % 6) + 1;
     this.randN=randNum;
-    // console.log("player = ",this.turn+1,"randNo = ",randNum);
+
     let c=0;
-    if(randNum!=6){
       this.pins.forEach(data=>{
-        if(data.out &&data.pinid.includes(this.getColor(this.turn))){
-          if(data.currplaceind+randNum<=(this.bluepathPosition.length)){
-            // console.log("curr in = ",data.currplaceind," new ind will be = ",data.currplaceind+randNum,"list length = ",this.bluePath.length);
-            document.getElementById(data.movepinid)!.classList.add('scale');
-            c++;
+          if(data.pinid.includes(this.getColor(this.turn)) && data.currplaceind+randNum<=(this.bluepathPosition.length)){
+            if(randNum!=6 && data.out){
+              document.getElementById(data.movepinid)!.classList.add('scale');
+              c++;
+            }else if(randNum==6){
+              document.getElementById(data.movepinid)!.classList.add('scale');
+              c++;
+              this.changeTurn=false;
+            }
           }
         }
-      })
-    }else{
-      this.pins.forEach(data=>{
-        if(data.pinid.includes(this.getColor(this.turn))){
-          if(data.currplaceind+randNum<=(this.bluepathPosition.length)){
-            // console.log("curr in = ",data.currplaceind," new ind will be = ",data.currplaceind+randNum,"list length = ",this.bluePath.length);
-            document.getElementById(data.movepinid)!.classList.add('scale');
-            c++;
-            this.changeTurn=false;
-          }
-        }
-      })
-    }
+      )
+
     if(this.changeTurn && c==0){
       this.turn=(++this.turn)%4;
-      // this.turn=0;
       this.getColor(this.turn);
     }
     if(c==0){
@@ -303,7 +295,7 @@ export class BoardComponent implements OnInit {
     if(c==1){
       this.pins.forEach(data=>{
         if(document.getElementById(data.movepinid)!.classList.contains('scale')){
-          this.selectedKey(data.movepinid);
+          this.movePin(data.movepinid);
         }
       });
     }
