@@ -1,4 +1,4 @@
-<div class="completepage">
+<div id="completepage" class="completepage">
 <div class="container" (click)="rollDice()">
   <div id="inner" class="inner">
     <p>{{randN}}</p>
@@ -195,4 +195,10 @@
   <div id="moveylpin3" class="yl pin" (click)="movePin('moveylpin3')">3</div>
   <div id="moveylpin4" class="yl pin" (click)="movePin('moveylpin4')">4</div>
 </div>
+</div>
+<div class="toggleButtons">
+  <button class="bl buttons" (click)="autoMoveToggle(0,3)">AutoMove {{this.pins[0].autoMove}}</button>
+  <button class="rd buttons" (click)="autoMoveToggle(4,7)">AutoMove {{this.pins[4].autoMove}}</button>
+  <button class="gr buttons" (click)="autoMoveToggle(8,11)">AutoMove {{this.pins[8].autoMove}}</button>
+  <button class="yl buttons" (click)="autoMoveToggle(12,15)">AutoMove {{this.pins[12].autoMove}}</button>
 </div>

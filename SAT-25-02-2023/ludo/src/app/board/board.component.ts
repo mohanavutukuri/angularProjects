@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { XY } from './point';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-board',
@@ -8,10 +9,12 @@ import { XY } from './point';
 })
 export class BoardComponent implements OnInit {
   title="ludo app is running!"
+
   turn:number=0;
   selected:string='';
   randN:number=0;
   changeTurn:Boolean=true;
+  chooseEnable:boolean=false;
   constructor() { }
 
   bluePath=["1,2","1,3","1,4","1,5","1,6","1,7","1,8","1,9","1,10",
@@ -40,26 +43,27 @@ export class BoardComponent implements OnInit {
   greenpathPosition:XY[]=[]
   yellowpathPosition:XY[]=[]
   pins=[
-    {pinid:"blpin1",player:0,movepinid:"moveblpin1",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"blpin2",player:0,movepinid:"moveblpin2",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"blpin3",player:0,movepinid:"moveblpin3",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"blpin4",player:0,movepinid:"moveblpin4",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"rdpin1",player:1,movepinid:"moverdpin1",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"rdpin2",player:1,movepinid:"moverdpin2",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"rdpin3",player:1,movepinid:"moverdpin3",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"rdpin4",player:1,movepinid:"moverdpin4",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"grpin1",player:2,movepinid:"movegrpin1",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"grpin2",player:2,movepinid:"movegrpin2",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"grpin3",player:2,movepinid:"movegrpin3",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"grpin4",player:2,movepinid:"movegrpin4",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"ylpin1",player:3,movepinid:"moveylpin1",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"ylpin2",player:3,movepinid:"moveylpin2",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"ylpin3",player:3,movepinid:"moveylpin3",currplaceind:-1,out:false,top:0,left:0,safe:true},
-    {pinid:"ylpin4",player:3,movepinid:"moveylpin4",currplaceind:-1,out:false,top:0,left:0,safe:true}
+    {pinid:"blpin1",player:0,movepinid:"moveblpin1",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"blpin2",player:0,movepinid:"moveblpin2",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"blpin3",player:0,movepinid:"moveblpin3",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"blpin4",player:0,movepinid:"moveblpin4",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"rdpin1",player:1,movepinid:"moverdpin1",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"rdpin2",player:1,movepinid:"moverdpin2",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"rdpin3",player:1,movepinid:"moverdpin3",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"rdpin4",player:1,movepinid:"moverdpin4",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"grpin1",player:2,movepinid:"movegrpin1",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"grpin2",player:2,movepinid:"movegrpin2",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"grpin3",player:2,movepinid:"movegrpin3",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"grpin4",player:2,movepinid:"movegrpin4",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"ylpin1",player:3,movepinid:"moveylpin1",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"ylpin2",player:3,movepinid:"moveylpin2",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"ylpin3",player:3,movepinid:"moveylpin3",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinid:"ylpin4",player:3,movepinid:"moveylpin4",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false}
   ]
 
   ngOnInit(): void {
     // this.setPins();
+    
   }
   ngAfterContentInit(){
     setTimeout(()=>this.setPins(),1000);
@@ -85,10 +89,6 @@ export class BoardComponent implements OnInit {
       let offSet=element!.getBoundingClientRect();
       this.yellowpathPosition.push({top:offSet.top,left:offSet.left})
     })
-    console.log(this.bluepathPosition[this.bluepathPosition.length-1]);
-    console.log(this.redpathPosition[this.redpathPosition.length-1]);
-    console.log(this.greenpathPosition[this.redpathPosition.length-1]);
-    console.log(this.yellowpathPosition[this.redpathPosition.length-1]);
     this.pins.forEach(each=>{
       let element=document.getElementById(each.pinid);
       let offSet=element!.getBoundingClientRect();
@@ -102,15 +102,19 @@ export class BoardComponent implements OnInit {
     switch(val){
       case 0:
         document.getElementById("inner")!.style.animation="blue-pulse linear 1s infinite";
+        document.getElementById("completepage")!.style.animation="blue-pulse linear 1s infinite";
         return "bl"
       case 1:
         document.getElementById("inner")!.style.animation="red-pulse linear 1s infinite";
+        document.getElementById("completepage")!.style.animation="red-pulse linear 1s infinite";
         return "rd"
       case 2:
         document.getElementById("inner")!.style.animation="green-pulse linear 1s infinite";
+        document.getElementById("completepage")!.style.animation="green-pulse linear 1s infinite";
         return "gr"
       case 3:
         document.getElementById("inner")!.style.animation="yellow-pulse linear 1s infinite";
+        document.getElementById("completepage")!.style.animation="yellow-pulse linear 1s infinite";
         return "yl"
     }
     return "";
@@ -158,7 +162,7 @@ export class BoardComponent implements OnInit {
     this.selected=id;
     let classlist=document.getElementById(id)!.classList;
     if(this.randN==0){
-      alert("please roll the dice");
+      Swal.fire("please roll the dice");
       return;
     }
     if(this.randN>0 && classlist.contains('scale')){
@@ -196,7 +200,7 @@ export class BoardComponent implements OnInit {
         }
       })
     }else{
-      alert("select a valid pin")
+      Swal.fire("select a valid pin");
     }
     if(this.changeTurn){
       setTimeout(()=>{
@@ -263,7 +267,7 @@ export class BoardComponent implements OnInit {
 
   rollDice() {
     if(this.randN!=0){
-      alert("please wait or move the pin");
+      Swal.fire("please wait or move the pin");
       return;
     }
     
@@ -298,7 +302,21 @@ export class BoardComponent implements OnInit {
           this.movePin(data.movepinid);
         }
       });
+    }else if(c>1){
+      let done=false;
+      this.pins.forEach(data=>{
+        if(document.getElementById(data.movepinid)!.classList.contains('scale') && data.autoMove && !done){
+          this.movePin(data.movepinid);
+          done=true;
+        }
+      });
     }
     
   }
+  autoMoveToggle(i:number,j:number){
+    for(let x=i;x<=j;x++){
+      this.pins[x].autoMove=!this.pins[x].autoMove;
+    }
+  }
 }
+
