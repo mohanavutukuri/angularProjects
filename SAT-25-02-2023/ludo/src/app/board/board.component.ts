@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { XY } from './point';
 import Swal from 'sweetalert2';
 
@@ -66,9 +66,14 @@ export class BoardComponent implements OnInit {
     
   }
   ngAfterContentInit(){
+    this.clacPathLoc();
     setTimeout(()=>this.setPins(),1000);
   }
-  setPins(){
+  clacPathLoc(){
+    this.bluepathPosition=[]
+    this.redpathPosition=[]
+    this.greenpathPosition=[]
+    this.yellowpathPosition=[]
     this.bluePath.forEach(eachPath=>{
       let element=document.getElementById(eachPath);
       let offSet=element!.getBoundingClientRect();
@@ -89,6 +94,8 @@ export class BoardComponent implements OnInit {
       let offSet=element!.getBoundingClientRect();
       this.yellowpathPosition.push({top:offSet.top,left:offSet.left})
     })
+  }
+  setPins(){
     this.pins.forEach(each=>{
       let element=document.getElementById(each.pinid);
       let offSet=element!.getBoundingClientRect();
@@ -158,6 +165,24 @@ export class BoardComponent implements OnInit {
       }
     }
   }
+  setPinatPlace(data:any){
+    if(data.movepinid.includes("bl")){
+      document.getElementById(this.selected)!.style.top=this.bluepathPosition[data.currplaceind].top+1+"px";
+      document.getElementById(this.selected)!.style.left=this.bluepathPosition[data.currplaceind].left+1.5+"px";
+    }
+    else if(data.movepinid.includes("rd")){
+      document.getElementById(this.selected)!.style.top=this.redpathPosition[data.currplaceind].top+1+"px";
+      document.getElementById(this.selected)!.style.left=this.redpathPosition[data.currplaceind].left+1.5+"px";
+    }
+    else if(data.movepinid.includes("gr")){
+      document.getElementById(this.selected)!.style.top=this.greenpathPosition[data.currplaceind].top+1+"px";
+      document.getElementById(this.selected)!.style.left=this.greenpathPosition[data.currplaceind].left+1.5+"px";
+    }
+    else if(data.movepinid.includes("yl")){
+      document.getElementById(this.selected)!.style.top=this.yellowpathPosition[data.currplaceind].top+1+"px";
+      document.getElementById(this.selected)!.style.left=this.yellowpathPosition[data.currplaceind].left+1.5+"px";
+    }
+  }
   movePin(id:string){
     this.selected=id;
     let classlist=document.getElementById(id)!.classList;
@@ -181,22 +206,7 @@ export class BoardComponent implements OnInit {
             this.sendtoFinish(data);
             return;
           }
-          if(this.selected.includes("bl")){
-            document.getElementById(this.selected)!.style.top=this.bluepathPosition[data.currplaceind].top+1+"px";
-            document.getElementById(this.selected)!.style.left=this.bluepathPosition[data.currplaceind].left+1.5+"px";
-          }
-          else if(this.selected.includes("rd")){
-            document.getElementById(this.selected)!.style.top=this.redpathPosition[data.currplaceind].top+1+"px";
-            document.getElementById(this.selected)!.style.left=this.redpathPosition[data.currplaceind].left+1.5+"px";
-          }
-          else if(this.selected.includes("gr")){
-            document.getElementById(this.selected)!.style.top=this.greenpathPosition[data.currplaceind].top+1+"px";
-            document.getElementById(this.selected)!.style.left=this.greenpathPosition[data.currplaceind].left+1.5+"px";
-          }
-          else if(this.selected.includes("yl")){
-            document.getElementById(this.selected)!.style.top=this.yellowpathPosition[data.currplaceind].top+1+"px";
-            document.getElementById(this.selected)!.style.left=this.yellowpathPosition[data.currplaceind].left+1.5+"px";
-          }
+          this.setPinatPlace(data);
         }
       })
     }else{
@@ -317,6 +327,22 @@ export class BoardComponent implements OnInit {
     for(let x=i;x<=j;x++){
       this.pins[x].autoMove=!this.pins[x].autoMove;
     }
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.clacPathLoc();
+    this.pins.forEach(data=>{
+      let element=document.getElementById(data.pinid);
+      let offSet=element!.getBoundingClientRect();
+      data.top=offSet.top
+      data.left=offSet.left
+      if(data.currplaceind==-1){
+        document.getElementById(data.movepinid)!.style.top=data.top+10+"px";
+        document.getElementById(data.movepinid)!.style.left=data.left+9.5+"px";
+      }else{
+        this.setPinatPlace(data);
+      }
+    })
   }
 }
 
