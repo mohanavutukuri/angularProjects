@@ -4,6 +4,16 @@
   background-color: black;
   animation: blue-pulse linear 1s infinite;
 }
+.winners{
+  position: absolute;
+  right: 0;
+  width: 10%;
+  color: white;
+}
+.winPlayer{
+  padding: 5%;
+  transform: skewY(10deg);
+}
 .main {
   position: relative;
   top: 10%;

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../shared.service';
-import { Subscription } from 'rxjs'
 @Component({
   selector: 'app-comp2',
   templateUrl: './comp2.component.html',

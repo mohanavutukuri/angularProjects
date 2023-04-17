@@ -1,0 +1,9 @@
+<asl-google-signin-button *ngIf="!user" type='icon' size='medium'></asl-google-signin-button>
+
+<img *ngIf="user" src="{{ user.photoUrl }}" referrerpolicy="no-referrer">
+<div *ngIf="user">
+  <h4>{{ user.name }}</h4>
+  <p>{{ user.email }}</p>
+  <button (click)="useGreet()">greet</button>
+</div>
+

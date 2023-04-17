@@ -15,6 +15,7 @@ export class BoardComponent implements OnInit {
   randN:number=0;
   changeTurn:Boolean=true;
   chooseEnable:boolean=false;
+  winnersList: any=[];
   constructor() { }
 
   bluePath=["1,2","1,3","1,4","1,5","1,6","1,7","1,8","1,9","1,10",
@@ -43,22 +44,22 @@ export class BoardComponent implements OnInit {
   greenpathPosition:XY[]=[]
   yellowpathPosition:XY[]=[]
   pins=[
-    {pinid:"blpin1",player:0,movepinid:"moveblpin1",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"blpin2",player:0,movepinid:"moveblpin2",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"blpin3",player:0,movepinid:"moveblpin3",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"blpin4",player:0,movepinid:"moveblpin4",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"rdpin1",player:1,movepinid:"moverdpin1",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"rdpin2",player:1,movepinid:"moverdpin2",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"rdpin3",player:1,movepinid:"moverdpin3",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"rdpin4",player:1,movepinid:"moverdpin4",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"grpin1",player:2,movepinid:"movegrpin1",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"grpin2",player:2,movepinid:"movegrpin2",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"grpin3",player:2,movepinid:"movegrpin3",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"grpin4",player:2,movepinid:"movegrpin4",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"ylpin1",player:3,movepinid:"moveylpin1",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"ylpin2",player:3,movepinid:"moveylpin2",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"ylpin3",player:3,movepinid:"moveylpin3",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
-    {pinid:"ylpin4",player:3,movepinid:"moveylpin4",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false}
+    {pinNo:1,pinid:"blpin1",player:0,movepinid:"moveblpin1",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:2,pinid:"blpin2",player:0,movepinid:"moveblpin2",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:3,pinid:"blpin3",player:0,movepinid:"moveblpin3",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:4,pinid:"blpin4",player:0,movepinid:"moveblpin4",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:1,pinid:"rdpin1",player:1,movepinid:"moverdpin1",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:2,pinid:"rdpin2",player:1,movepinid:"moverdpin2",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:3,pinid:"rdpin3",player:1,movepinid:"moverdpin3",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:4,pinid:"rdpin4",player:1,movepinid:"moverdpin4",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:1,pinid:"grpin1",player:2,movepinid:"movegrpin1",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:2,pinid:"grpin2",player:2,movepinid:"movegrpin2",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:3,pinid:"grpin3",player:2,movepinid:"movegrpin3",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:4,pinid:"grpin4",player:2,movepinid:"movegrpin4",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:1,pinid:"ylpin1",player:3,movepinid:"moveylpin1",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:2,pinid:"ylpin2",player:3,movepinid:"moveylpin2",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:3,pinid:"ylpin3",player:3,movepinid:"moveylpin3",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false},
+    {pinNo:4,pinid:"ylpin4",player:3,movepinid:"moveylpin4",currplaceind:-1,out:false,top:0,left:0,safe:true,autoMove:false}
   ]
 
   ngOnInit(): void {
@@ -67,7 +68,8 @@ export class BoardComponent implements OnInit {
   }
   ngAfterContentInit(){
     this.clacPathLoc();
-    setTimeout(()=>this.setPins(),1000);
+    // this.setPins();
+    setTimeout(()=>this.setPins(),100);
   }
   clacPathLoc(){
     this.bluepathPosition=[]
@@ -211,6 +213,7 @@ export class BoardComponent implements OnInit {
       })
     }else{
       Swal.fire("select a valid pin");
+      return;
     }
     if(this.changeTurn){
       setTimeout(()=>{
@@ -230,18 +233,34 @@ export class BoardComponent implements OnInit {
       case 0:
         console.log("sending blue to finish");
         document.getElementById(data.movepinid)!.style.top=(this.bluepathPosition[this.bluepathPosition.length-1].top-32)+"px";
+        if(this.pins[0].currplaceind==this.bluepathPosition.length && this.pins[1].currplaceind==this.bluepathPosition.length &&
+          this.pins[2].currplaceind==this.bluepathPosition.length && this.pins[3].currplaceind==this.bluepathPosition.length){
+            this.winnersList.push({player:"player 1",class:"bl"})
+          }
         break;
       case 1:
         console.log("sending red to finish");
         document.getElementById(data.movepinid)!.style.left=(this.redpathPosition[this.redpathPosition.length-1].left+33)+"px";
+        if(this.pins[4].currplaceind==this.bluepathPosition.length && this.pins[5].currplaceind==this.bluepathPosition.length &&
+          this.pins[6].currplaceind==this.bluepathPosition.length && this.pins[7].currplaceind==this.bluepathPosition.length){
+            this.winnersList.push({player:"player 2",class:"rd"})
+          }
         break;
       case 2:
         console.log("sending green to finish");
         document.getElementById(data.movepinid)!.style.top=(this.greenpathPosition[this.greenpathPosition.length-1].top+32)+"px";
+        if(this.pins[8].currplaceind==this.bluepathPosition.length && this.pins[9].currplaceind==this.bluepathPosition.length &&
+          this.pins[10].currplaceind==this.bluepathPosition.length && this.pins[11].currplaceind==this.bluepathPosition.length){
+            this.winnersList.push({player:"player 3",class:"gr"})
+          }
         break;
       case 3:
         console.log("sending yellow to finish");
         document.getElementById(data.movepinid)!.style.left=(this.yellowpathPosition[this.yellowpathPosition.length-1].left-33)+"px";
+        if(this.pins[12].currplaceind==this.bluepathPosition.length && this.pins[13].currplaceind==this.bluepathPosition.length &&
+          this.pins[14].currplaceind==this.bluepathPosition.length && this.pins[15].currplaceind==this.bluepathPosition.length){
+            this.winnersList.push({player:"player 4",class:"yl"})
+          }
         break;
     }
     console.log(document.getElementById(data.movepinid)!.style.top,document.getElementById(data.movepinid)!.style.left);

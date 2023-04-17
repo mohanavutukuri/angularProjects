@@ -1,4 +1,10 @@
 <div id="completepage" class="completepage">
+
+  <div class="winners">
+        <h3 style="margin-bottom: 10%;">Winners</h3>
+        <p class="winPlayer" *ngFor="let winner of winnersList" [class]="winner.class">{{winner.player}}</p>
+  </div>
+
 <div class="container" (click)="rollDice()">
   <div id="inner" class="inner">
     <p>{{randN}}</p>
@@ -173,28 +179,11 @@
   </div>
 </div>
 <div class="allpins">
-  <!-- <div *ngFor="let ele of pins" [id]="ele.movepinid"
-  [ngClass]="{'rd pin': ele.movepinid.includes('rd'),'bl pin': ele.movepinid.includes('bl')}"></div> -->
-  <div id="moveblpin1" class="bl pin" (click)="movePin('moveblpin1')">1</div>
-  <div id="moveblpin2" class="bl pin" (click)="movePin('moveblpin2')">2</div>
-  <div id="moveblpin3" class="bl pin" (click)="movePin('moveblpin3')">3</div>
-  <div id="moveblpin4" class="bl pin" (click)="movePin('moveblpin4')">4</div>
-
-  <div id="moverdpin1" class="rd pin" (click)="movePin('moverdpin1')">1</div>
-  <div id="moverdpin2" class="rd pin" (click)="movePin('moverdpin2')">2</div>
-  <div id="moverdpin3" class="rd pin" (click)="movePin('moverdpin3')">3</div>
-  <div id="moverdpin4" class="rd pin" (click)="movePin('moverdpin4')">4</div>
-
-  <div id="movegrpin1" class="gr pin" (click)="movePin('movegrpin1')">1</div>
-  <div id="movegrpin2" class="gr pin" (click)="movePin('movegrpin2')">2</div>
-  <div id="movegrpin3" class="gr pin" (click)="movePin('movegrpin3')">3</div>
-  <div id="movegrpin4" class="gr pin" (click)="movePin('movegrpin4')">4</div>
-
-  <div id="moveylpin1" class="yl pin" (click)="movePin('moveylpin1')">1</div>
-  <div id="moveylpin2" class="yl pin" (click)="movePin('moveylpin2')">2</div>
-  <div id="moveylpin3" class="yl pin" (click)="movePin('moveylpin3')">3</div>
-  <div id="moveylpin4" class="yl pin" (click)="movePin('moveylpin4')">4</div>
-</div>
+  <div *ngFor="let ele of pins" [id]="ele.movepinid" class="pin"
+    [ngClass]="{'rd': ele.movepinid.includes('rd'),'bl': ele.movepinid.includes('bl'),'gr':ele.movepinid.includes('gr'),'yl':ele.movepinid.includes('yl')}"
+    (click)="movePin(ele.movepinid)">
+    {{ele.pinNo}}
+  </div>
 </div>
 <div class="toggleButtons">
   <button class="bl buttons" (click)="autoMoveToggle(0,3)">AutoMove {{this.pins[0].autoMove}}</button>
